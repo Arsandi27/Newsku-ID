@@ -1,0 +1,264 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Newsku-ID</title>
+    <link rel="shortcut icon" type="media/jpg" href="media/news1.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Zqk5Wlq87L6fFmBGtzLbNvMW2kpU5Nvsy2U19GoaVMW2A0iOT+bPUw+0bqYlQ/zi1MRyjhDTNpI8t3+bd4bNhw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Gabarito&family=Hedvig+Letters+Serif:opsz@12..24&family=Playfair+Display:wght@600;700&family=Poppins:wght@100&family=Roboto+Condensed&family=Roboto+Slab&family=Sofia+Sans+Semi+Condensed&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+  
+      body {
+        height: 100%;
+        background-color:#9EB8D9;
+      }
+      header{
+        height: 90px;
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        position: fixed;
+        z-index: 12;
+      
+      }
+      
+      .logo{
+        font-family: 'Aclonica', sans-serif;
+        font-size: 30px;
+        padding: 15px; 
+        margin-left: 15px; 
+        float: left;
+        
+      }
+      .logo a{
+        color: #fff;
+        text-decoration: none;
+      }
+      #btnBack {
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+   }
+   
+      .nav_bar{
+        margin-bottom: 20px;
+        font-family:'Gabarito', sans-serif; 
+        font-size: 20px;
+        float: left;
+  
+        
+      }
+      
+      .nav_bar li {
+        margin-top: 20px;
+        display: inline-block;
+      
+      }
+      .nav_bar li a {
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+        font-size: 28px; 
+        font-weight: bold;
+        text-decoration: none; 
+      }
+      .nav_bar li a:hover{
+        background: #959191;
+        color: #fff;
+        border: 1px solid #000;
+        border-radius: 30px;
+        padding: 10px;
+      }
+  
+    .search-form {
+      display: flex;
+      overflow: hidden;
+      margin-top: 20px;
+      padding-left: 30px;
+      padding-right: 30px;
+      
+    }
+  
+    .search-input {
+      flex: 1;
+      border: 2px solid #4169E1; 
+      border-radius: 35px; 
+      padding: 10px;
+      color: #4169E1;
+      margin-right: 15px;
+    }
+  
+    .search-button {
+      border: 2px solid #4169E1;
+      border-radius:40px;
+      padding: 10px; 
+      
+
+    }
+    .icon {
+    color: #4169E1;
+  }
+  .carousel-caption.box {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 50px;
+}
+.logout-li {
+  position: relative;
+  top: -4px; 
+}
+.carousel-caption{
+  color: #fff;
+}
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+.hoverable .card {
+    transition: transform 0.3s;
+}
+
+.hoverable .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+.card-container {
+  max-width: 400px; 
+            
+ }
+ .card-text {
+ font-family: 'Hedvig Letters Serif', serif;     
+}
+  .card-title{
+    font-family:'Sofia Sans Semi Condensed', sans-serif;
+}
+
+.box{
+        background-color: rgba(0, 0, 0, 0.3);
+      width: 75%; 
+      padding: 50px;
+      color: #fff;
+      }
+.caption{
+  font-family:'Gabarito', sans-serif; 
+}
+.title{
+  color: #fff;
+}
+  footer {
+    background-color: #4169E1;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+.foot{
+  color: #000;
+  font-weight: bold;
+  font-size: large;
+
+}
+
+      
+  </style>
+  </head>
+
+
+  <body>
+    <header class="nav_bar">
+      <div class="logo">
+      
+        <a href="{% url 'home' %}">Newsku-ID</a>
+     </div>
+        <div class="nav_bar">
+            <ul>
+                <li><a href="{% url 'news_page' %}">All News </a></li>
+                <li><a href="{% url 'all_categories' %}">All Category</a></li>
+                {% if request.user %}
+                <li class="logout-li">
+                    <form action="{% url 'logout_account' %}" method="post">
+                      {% csrf_token %}
+                      <button class="large-text btn" type="submit"><a class="large-text">Logout</a></button>
+                  </form>
+                  </li>
+                {% else %}
+                  <li><a href="{% url 'login' %}" class="large-text">login | register</a></li>
+                {% endif %}
+            </ul>
+        
+        </div>
+        <form class="search-form" action="{% url 'search' %}" method="get">
+          <input class="search-input" type="text" name="q" placeholder="Search...">
+          <button class="search-button" type="submit"><i class="fa fa-search fa-lg icon"></i>
+        </button>
+        </form>
+      </div>      
+    </header>
+
+    {%block content %}
+
+    {% endblock %}
+    <footer>
+      <div class="foot">
+        <p>&copy; 2023 Newsku-ID.</p>
+      </div>
+        <a href="https://wa.me/6281413265489"  target="_blank">
+        <img src="media/5a4e2ef62da5ad73df7efe6e.png" style="height: 35px;"></a>
+        <a href="https://www.instagram.com/dzaky.arsandi/" target="_blank">
+        <img src="media/instagram_logo_icon_181283.png" style="height: 50px; margin-right: 3px;">
+        </a>
+        <a href="https://twitter.com/arizhafri" target="_blank">
+        <img src="media/1691832278twitter-x-logo-png.png" style="height: 30px; margin-right: 10px;">
+        </a>
+  
+  </footer>
+  
+    
+ </body>
+ 
+  
+   
+  <script>
+    var navBar = document.querySelector(".nav_bar"); 
+    window.addEventListener("scroll", () => {
+ if (document.documentElement.scrollTop > 100) {
+     navBar.classList.add("sticky");
+     navBar.style.background = '#4169E1'; 
+ } else {
+     navBar.classList.remove("sticky");
+     navBar.style.background = 'rgba(0, 0, 0, 0.3)';
+ }
+});
+
+ </script>
+
+
+<script>
+  document.getElementById("btnBack").addEventListener("click", function() {
+      
+      window.history.back();
+      navigationHistory.push(window.location.href);
+  });
+
+</script>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+
+
+</html>

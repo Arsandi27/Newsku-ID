@@ -1,0 +1,262 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Newsku-ID</title>
+    <link rel="shortcut icon" type="media/png" href="/media/news1.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Zqk5Wlq87L6fFmBGtzLbNvMW2kpU5Nvsy2U19GoaVMW2A0iOT+bPUw+0bqYlQ/zi1MRyjhDTNpI8t3+bd4bNhw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6p9sAwoV4hFt5F88G6Bt62I6K24dJrx" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Gabarito&family=Hedvig+Letters+Serif:opsz@12..24&family=Playfair+Display:wght@600;700&family=Poppins:wght@100&family=Roboto+Condensed&family=Roboto+Slab&family=Sofia+Sans+Semi+Condensed&display=swap" rel="stylesheet">
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 100%;
+        background-color:#9EB8D9;
+      }
+      header{
+        height: 90px;
+        background: #4169E1;
+        width: 100%;
+        z-index: 12;
+        transition: transform 0.3s ease;
+        
+      }
+      .content {
+        height: 1500px;
+        background: #f0f0f0;
+      }
+      .scrolled {
+        transform: translateY(-100%);
+      }
+    
+      .logo{
+        font-family: 'Aclonica', sans-serif;
+        font-size: 30px;
+        padding: 15px; 
+        margin-left: 15px; 
+        float: left;
+        
+      }
+      .logo a{
+        color: #fff;
+        text-decoration: none;
+      }
+      #btnBack {
+        background-color:rgba(0, 0, 0, 0.3);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        
+     }
+     
+  
+      .nav_bar{
+        margin-bottom: 20px;
+        font-family:'Gabarito', sans-serif; 
+        font-size: 20px;
+        float: left;
+        position: sticky;
+  
+
+      }
+      
+      .nav_bar li {
+        margin-top: 25px;
+        display: inline-block;
+      
+      }
+      .nav_bar li a {
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+        font-size: 28px; 
+        font-weight: bold;
+        text-decoration: none; 
+      }
+      .nav_bar li a:hover{
+        background: #959191;
+        color: #fff;
+        border: 1px solid #000;
+        border-radius: 30px;
+        padding: 10px;
+      }
+      .search-form {
+      display: flex;
+      overflow: hidden;
+      margin-top: 20px;
+      padding-left: 30px;
+      padding-right: 30px;
+      
+    }
+    .search-input {
+      flex: 1;
+      border: 2px solid #4169E1; 
+      border-radius: 35px; 
+      padding: 10px; 
+      color: #4169E1;
+      margin-right: 15px;
+    }
+  
+    .search-button {
+      border: 2px solid #4169E1; 
+      border-radius:40px; 
+      padding: 10px; 
+      
+
+    }
+
+    .card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+.hoverable .card {
+    transition: transform 0.3s;
+}
+
+.hoverable .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+    .icon {
+    color: #4169E1;
+  }
+  .logout-li {
+    position: relative;
+    top: -4px;
+  }
+  .card-container {
+  max-width: 400px; 
+              
+  }
+  .card-text {
+  font-family:'Hedvig Letters Serif', serif;   
+            
+    
+  }
+  .card-title{
+    font-family:'Sofia Sans Semi Condensed', sans-serif;
+  }
+  .related{
+    font-family:'Gabarito', sans-serif;
+  }   
+  
+     
+  footer {
+      background-color: #4169E1;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      bottom: 0;
+      width: 100%;
+  }
+  .foot{
+  color: #000;
+  font-weight: bold;
+  font-size: large;
+
+}
+</style>
+  </head>
+
+  <header class="nav_bar">
+    <div class="logo">
+      <button id="btnBack" class="btn btn-primary"><</button>
+      <a href="{% url 'home' %}">Newsku-ID</a>
+   </div>
+    <div class="nav_bar">
+        <ul>
+            <li><a href="{% url 'news_page' %}">All news </a></li>
+            <li><a href="{% url 'all_categories' %}">All category</a></li>
+            {% if request.user %}
+                <li class="logout-li">
+                    <form action="{% url 'logout_account' %}" method="post">
+                      {% csrf_token %}
+                      <button class="large-text btn" type="submit"><a class="large-text">Logout</a></button>
+                  </form>
+                  </li>
+                {% else %}
+                  <li><a href="{% url 'login' %}" class="large-text">login | register</a></li>
+                {% endif %}
+            </ul>
+        </ul>
+    
+    </div>
+    <form class="search-form" action="{% url 'search' %}" method="get">
+      <input class="search-input" type="text" name="q" placeholder="Search...">
+      <button class="search-button" type="submit"><i class="fa fa-search fa-lg icon"></i>
+    </button>
+    </form>
+  </div>    
+   
+</header>
+
+
+  <body>
+    
+
+    {%block content %}
+
+    {% endblock %}
+
+    
+
+    <footer>
+      <div class="foot">
+        <p>&copy; 2023 Newsku-ID.</p>
+      </div>
+        <a href="https://wa.me/6281413265489"  target="_blank">
+        <img src="/media/5a4e2ef62da5ad73df7efe6e.png" style="height: 35px;"></a>
+        <a href="https://www.instagram.com/dzaky.arsandi/" target="_blank">
+        <img src="/media/instagram_logo_icon_181283.png" style="height: 50px; margin-right: 3px;">
+        </a>
+        <a href="https://twitter.com/arizhafri" target="_blank">
+        <img src="/media/1691832278twitter-x-logo-png.png" style="height: 30px; margin-right: 10px;">
+        </a>
+  
+  </footer>
+ </body>
+ 
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-mC9BO3aZ35V5oI4A6XnpIVB1uXOz+xHgAg/vAgBVoOVex3jTN1W6E5g/vlYBq1Nt" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6p9sAwoV4hFt5F88G6Bt62I6K24dJrx" crossorigin="anonymous"></script>
+   
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>  
+
+
+<script>
+  document.getElementById("btnBack").addEventListener("click", function() {
+      // Kembali satu langkah dalam sejarah browser
+      window.history.back();
+  });
+</script>
+<script>
+  var prevScrollpos = window.pageYOffset;
+
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  var navbar = document.getElementById(".nav_bar");
+
+  if (prevScrollpos > currentScrollPos) {
+    navbar.style.top = "0";
+  } else {
+    navbar.style.top = "-100px"; // Adjust based on your navbar height
+  }
+
+  prevScrollpos = currentScrollPos;
+};
+
+</script>
+
+</html>
